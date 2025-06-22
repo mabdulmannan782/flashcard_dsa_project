@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Search Subjects{% endblock %}
+{% load static %}
+{% load custom_filters %}
+{% block content %}
+<div class="container mt-5" style="max-width:700px;">
+    <h2>Search Results for "{{ query }}"</h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Subject Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subject in subjects %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ subject.name }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">No subject found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

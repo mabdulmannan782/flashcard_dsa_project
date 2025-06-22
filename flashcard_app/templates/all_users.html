@@ -1,0 +1,27 @@
+{% extends 'base_admin.html' %}
+{% block admin_title %}All Registered Users{% endblock admin_title %}
+{% block admin_panel %}
+<div class="container mt-5" style="max-width:700px;">
+    <h2>All Registered Users</h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Date Joined</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.date_joined }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+
+{% block admin_title %}Add Chapter{% endblock admin_title %}
+
+{% block admin_panel %}
+<div class="container mt-5" style="max-width:400px;">
+    <h2>Add Chapter to {{ subject.name }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="name" class="form-control mb-3" placeholder="Chapter Name" required>
+        <button type="submit" class="btn btn-primary w-100">Add Chapter</button>
+    </form>
+</div>
+{% endblock admin_panel %}

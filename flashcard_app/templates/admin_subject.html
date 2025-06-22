@@ -1,0 +1,25 @@
+{% extends 'base_admin.html' %}
+{% block admin_title %}All Subjects{% endblock admin_title %}
+{% block admin_panel %}
+<div class="container mt-5">
+    <h2>All Subjects</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Subject Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subject in subjects %}
+            <tr>
+                <td>{{ subject.name }}</td>
+                <td>
+                    <a href="{% url 'subject_chapters' subject.id %}" class="btn btn-primary btn-sm">View Chapters</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock admin_panel %}

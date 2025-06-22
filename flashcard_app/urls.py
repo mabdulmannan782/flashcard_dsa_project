@@ -1,0 +1,30 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('home/', views.home, name='home'),
+    path('login/', views.user_login, name='login'),
+    path('register/', views.register, name='register'),
+    path('logout/', views.user_logout, name='logout'),
+    path('profile/', views.profile, name='profile'),
+    path('admin_panel/subjects/', views.admin_subjects, name='admin_subjects'),
+    path('add_subject/', views.add_subject, name='add_subject'),
+    path('subject/<int:subject_id>/chapters/', views.subject_chapters, name='subject_chapters'),
+    path('edit_subject/<int:subject_id>/', views.edit_subject, name='edit_subject'),
+    path('delete_subject/<int:subject_id>/', views.delete_subject, name='delete_subject'),
+    path('subject/<int:subject_id>/add_chapter/', views.add_chapter, name='add_chapter'),
+    path('admin_panel/chapters/', views.admin_chapters, name='admin_chapters'),
+    path('edit_chapter/<int:chapter_id>/', views.edit_chapter, name='edit_chapter'),
+    path('delete_chapter/<int:chapter_id>/', views.delete_chapter, name='delete_chapter'),
+    path('chapter/<int:chapter_id>/add_question/', views.add_question, name='add_question'),
+    path('chapter/<int:chapter_id>/questions/', views.view_questions, name='view_questions'),
+    path('quiz/<int:chapter_id>/', views.quiz, name='quiz'),
+    path('quiz/<int:chapter_id>/result/', views.quiz_result, name='quiz_result'),
+    path('my_quiz_attempts/', views.my_quiz_attempts, name='my_quiz_attempts'),
+    path('admin_panel/', views.admin_panel, name='admin_panel'),
+    path('search_subject/', views.search_subject, name='search_subject'),
+    path('admin_search/', views.admin_search, name='admin_search'),
+    path('all_users/', views.all_users, name='all_users'),
+    path('all_quiz_results/', views.all_quiz_results, name='all_quiz_results'),
+]

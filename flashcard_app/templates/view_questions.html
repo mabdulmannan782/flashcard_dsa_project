@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Questions in {{ chapter.name }}{% endblock %}
+{% block content %}
+<div class="container mt-5" style="max-width:800px;">
+    <h2>Questions in {{ chapter.name }}</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Question</th>
+                <th>Option 1</th>
+                <th>Option 2</th>
+                <th>Option 3</th>
+                <th>Option 4</th>
+                <th>Correct Option</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for q in questions %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ q.question_text }}</td>
+                <td>{{ q.option1 }}</td>
+                <td>{{ q.option2 }}</td>
+                <td>{{ q.option3 }}</td>
+                <td>{{ q.option4 }}</td>
+                <td>Option {{ q.correct_option }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No questions found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block title %}My Quiz Attempts{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>My Quiz Attempts</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Chapter</th>
+                <th>Total Questions</th>
+                <th>Attempted</th>
+                {% comment %} <th>Correct</th> {% endcomment %}
+                <th>Result</th>
+                <th>View Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for attempt in attempts %}
+            {% with questions=attempt.chapter.questions.all %}
+            {% with total=questions|length %}
+            {% with correct=0 %}
+            {% for q in questions %}
+                {% if attempt.answers|get_item:q.id|stringformat:"s" == q.correct_option|stringformat:"s" %}
+                    {% widthratio 1 1 1 as correct %}{% widthratio correct 1 1 as correct %}
+                {% endif %}
+            {% endfor %}
+            <tr>
+                <td>{{ attempt.chapter.subject.name }}</td>
+                <td>{{ attempt.chapter.name }}</td>
+                <td>{{ total }}</td>
+                <td>{{ attempt.answers|length }}</td>
+                {% comment %} <td>
+                    {% with correct=0 %}
+                    {% for q in questions %}
+                        {% if attempt.answers|get_item:q.id|stringformat:"s" == q.correct_option|stringformat:"s" %}
+                            {% widthratio 1 1 1 as correct %}{% widthratio correct 1 1 as correct %}
+                        {% endif %}
+                    {% endfor %}
+                    {{ correct }}
+                    {% endwith %}
+                </td> {% endcomment %}
+                <td>
+                    {{ attempt.answers|length }}/{{ total }}
+                </td>
+                <td>
+                    <a href="{% url 'quiz_result' attempt.chapter.id %}" class="btn btn-info btn-sm">View Result</a>
+                </td>
+            </tr>
+            {% endwith %}
+            {% endwith %}
+            {% endwith %}
+            {% empty %}
+            <tr>
+                <td colspan="7">No quiz attempts found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

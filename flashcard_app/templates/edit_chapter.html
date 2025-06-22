@@ -1,0 +1,15 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+
+{% block admin_title %}Edit Chapter{% endblock admin_title %}
+
+{% block admin_panel %}
+<div class="container mt-5" style="max-width:400px;">
+    <h2>Edit Chapter</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="name" class="form-control mb-3" value="{{ chapter.name }}" required>
+        <button type="submit" class="btn btn-warning w-100">Update Chapter</button>
+    </form>
+</div>
+{% endblock admin_panel %}

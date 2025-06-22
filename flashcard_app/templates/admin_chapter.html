@@ -1,0 +1,29 @@
+{% extends 'base_admin.html' %}
+{% block admin_title %}All Chapters{% endblock admin_title %}
+{% block admin_panel %}
+<div class="container mt-5">
+    <h2>All Chapters</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Chapter Name</th>
+                <th>Subject</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for chapter in chapters %}
+            <tr>
+                <td>{{ chapter.name }}</td>
+                <td>{{ chapter.subject.name }}</td>
+                <td>
+                    <a href="{% url 'edit_chapter' chapter.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'delete_chapter' chapter.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="{% url 'add_question' chapter.id %}" class="btn btn-success btn-sm">Add Question</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock admin_panel %}

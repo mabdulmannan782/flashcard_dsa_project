@@ -1,0 +1,58 @@
+{% extends 'base_admin.html' %}
+{% block admin_title %}All Users' Quiz Results{% endblock admin_title %}
+{% block admin_panel %}
+<div class="container mt-5" style="max-width:1000px;">
+    <h2>All Users' Quiz Results</h2>
+    {% for quiz in all_results %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <strong>User:</strong> {{ quiz.user.username }} |
+                <strong>Subject:</strong> {{ quiz.subject.name }} |
+                <strong>Chapter:</strong> {{ quiz.chapter.name }}
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Question</th>
+                            <th>User's Answer</th>
+                            <th>Correct Answer</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for r in quiz.results %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ r.question }}</td>
+                            <td>
+                                {% if r.user_answer_text %}
+                                    {{ r.user_answer_text }}
+                                {% else %}
+                                    <span class="text-warning">Not Attempted</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ r.correct_answer_text }}</td>
+                            <td>
+                                {% if r.user_answer %}
+                                    {% if r.is_correct %}
+                                        <span class="text-success">Correct</span>
+                                    {% else %}
+                                        <span class="text-danger">Wrong</span>
+                                    {% endif %}
+                                {% else %}
+                                    <span class="text-secondary">Not Attempted</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% empty %}
+        <div class="alert alert-info">No quiz attempts found.</div>
+    {% endfor %}
+</div>
+{% endblock %}

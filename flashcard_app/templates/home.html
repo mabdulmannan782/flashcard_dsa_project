@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Flashcard DSA Quiz Home{% endblock title %}
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center">Welcome to the Flashcard DSA Quiz</h1>
+        <h2 class="text-center">Select a Subject to Start</h2>
+        <div class="row">
+            {% for subject in subjects %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ subject.name }}</h5>
+                            <li class="list-group-item">
+                                <a href="{% url 'subject_chapters' subject.id %}" class="btn btn-primary">{{ subject.name }}</a>
+                            </li>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

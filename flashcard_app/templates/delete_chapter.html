@@ -1,0 +1,16 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+
+{% block admin_title %}Delete Chapter{% endblock admin_title %}
+
+{% block admin_panel %}
+<div class="container mt-5" style="max-width:400px;">
+    <h2>Delete Chapter</h2>
+    <p>Are you sure you want to delete "{{ chapter.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'subject_chapters' chapter.subject.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock admin_panel %}

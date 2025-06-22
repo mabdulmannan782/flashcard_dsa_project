@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Chapters in {{ subject.name }}{% endblock %}
+{% block content %}
+    <div class="container mt-5" style="max-width:600px;">
+        <h3>{{ chapter.name }} - Quiz</h3>
+        <p>Question {{ q_index|add:1 }} of {{ total_questions }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <strong>{{ question.question_text }}</strong>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="selected_option" value="1" id="opt1"
+                    {% if selected == 1 %}checked{% endif %} {% if submitted %}disabled{% endif %}>
+                <label class="form-check-label" for="opt1">{{ question.option1 }}</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="selected_option" value="2" id="opt2"
+                    {% if selected == 2 %}checked{% endif %} {% if submitted %}disabled{% endif %}>
+                <label class="form-check-label" for="opt2">{{ question.option2 }}</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="selected_option" value="3" id="opt3"
+                    {% if selected == 3 %}checked{% endif %} {% if submitted %}disabled{% endif %}>
+                <label class="form-check-label" for="opt3">{{ question.option3 }}</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="selected_option" value="4" id="opt4"
+                    {% if selected == 4 %}checked{% endif %} {% if submitted %}disabled{% endif %}>
+                <label class="form-check-label" for="opt4">{{ question.option4 }}</label>
+            </div>
+            <div class="mt-4">
+                {% if not submitted %}
+                    <button type="submit" name="prev" class="btn btn-secondary" {% if not has_prev %}disabled{% endif %}>Previous</button>
+                    <button type="submit" name="next" class="btn btn-primary" {% if not has_next %}disabled{% endif %}>Next</button>
+                    {% if q_index == total_questions|add:"-1" %}
+                        <button type="submit" name="submit" class="btn btn-success">Submit</button>
+                    {% endif %}
+                {% else %}
+                    <div class="alert alert-info mt-3">Quiz already submitted. You cannot edit your answers.</div>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+{% endblock %}

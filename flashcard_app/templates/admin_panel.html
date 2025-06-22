@@ -1,0 +1,37 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+{% block admin_title %}Admin Panel{% endblock admin_title %}
+{% block admin_panel %}
+    <div class="container mt-5">
+        <h1>Admin Panel</h1>
+        <div class="mb-4">
+            <a href="{% url 'add_subject' %}" class="btn btn-primary">Add Subject</a>
+            {% comment %} <a href="{% url 'add_question' %}" class="btn btn-secondary">Add Question</a> {% endcomment %}
+        </div>
+        <h2>Manage Subjects</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Subject Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subject in subjects %}
+                <tr>
+                    <td>{{ subject.name }}</td>
+                    <td>
+                        <a href="{% url 'add_chapter' subject.id %}" class="btn btn-primary">Add Chapter</a>
+                        <a href="{% url 'subject_chapters' subject.id %}" class="btn btn-info">View Chapters</a>
+                        <a href="{% url 'edit_subject' subject.id %}" class="btn btn-warning">Edit</a>
+                        <form action="{% url 'delete_subject' subject.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div> 
+{% endblock admin_panel %}
